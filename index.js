@@ -8,7 +8,8 @@
  * It takes two arguments:
  * @param stringList an array of strings.
  * @param callback function that takes a string as its argument.
- * @returns the result of invoking `callback` with the FIRST element in `stringList`.
+ * @returns the result of invoking `callback` with the FIRST 
+ * element in `stringList`.
  * 
  * Example of usage of this higher-order function:
  * Invoking `processFirstItem` passing `['foo', 'bar']` and `(str) => str + str`,
@@ -39,17 +40,20 @@ function processFirstItem(stringList, callback) {
  * It takes two arguments:
  * @param list an array with elements of any type.
  * @param callback function that takes a number as its argument.
- * @returns the result of invoking `callback` passing the LENGTH of `list`.
+ * @returns the result of invoking `callback` passing the
+ *  LENGTH of `list`.
  * 
  * Examples of usage of this higher-order function:
- * [1] Invoking `processLength` passing `['foo', 'bar']` and `(num) => num + 1000`,
+ * [1] Invoking `processLength` passing `['foo', 'bar']` 
+ * and `(num) => num + 1000`,
  * should return 1002.
  * 
- * [2] Invoking `processLength` passing `[]` and `(num) => "There are " + num`,
+ * [2] Invoking `processLength` passing `[]` and 
+ * `(num) => "There are " + num`,
  * should return "There are 0".
 */
-function processLength(/* CODE HERE */) {
-  /* CODE HERE */
+function processLength(list, callback) {
+  return callback(list.length);
 }
 
 /**
@@ -60,14 +64,17 @@ function processLength(/* CODE HERE */) {
  * It takes two arguments:
  * @param stringList array of strings.
  * @param callback function that takes a string as its argument.
- * @returns the result of invoking `callback` with the LAST element in `stringList`.
+ * @returns the result of invoking `callback` with 
+ * the LAST element in `stringList`.
  * 
  * Example of usage of this higher-order function:
- * Invoking `processLastItem` passing `['foo', 'bar']` and `(str) => str + str`,
+ * Invoking `processLastItem` passing `['foo', 'bar']` 
+ * and `(str) => str + str`,
  * should return 'barbar'.
 */
-function processLastItem(/* CODE HERE */) {
+function processLastItem(stringList, callback) {
   /* CODE HERE */
+  return callback(stringList[stringList.length - 1]);
 }
 
 /**
@@ -78,7 +85,8 @@ function processLastItem(/* CODE HERE */) {
  * It takes two arguments:
  * @param numberList array of numbers.
  * @param callback function that takes a number as its argument.
- * @returns the result of invoking `callback` passing the SUM of all elements in `numberList`.
+ * @returns the result of invoking `callback` 
+ * passing the SUM of all elements in `numberList`.
  * 
  * Examples of usage of this higher-order function:
  * [1] Invoking `processSum` passing `[10, 20, 30]` and `(num) => num + " is a big number!"`,
@@ -87,8 +95,12 @@ function processLastItem(/* CODE HERE */) {
  * [2] Invoking `processSum` passing `[]` and `(num) => num + 1000`,
  * should return 1000.
 */
-function processSum(/* CODE HERE */) {
+function processSum(numberList, callback) {
   /* CODE HERE */
+  function getSum(accu, nextVal){
+    return accu + nextVal;
+  }
+  return callback(numberList.reduce(getSum, 0));
 }
 
 /**
@@ -100,18 +112,24 @@ function processSum(/* CODE HERE */) {
  * @param num1 a number.
  * @param num2 a number.
  * @param callback function that takes a number as its argument.
- * @returns the result of invoking `callback` passing the PRODUCT of `num1` and `num2`.
+ * @returns the result of invoking
+ *  `callback` passing the PRODUCT of `num1` and `num2`.
  * 
  * Examples of usage of this higher-order function:
- * [1] Invoking `processProduct` passing 2 and 7 and `(num) => num + " is a big number!"`,
+ * [1] Invoking `processProduct` passing 2 and 7 and
+ *  `(num) => num + " is a big number!"`,
  * should return "14 is a big number!".
  * 
- * [2] Invoking `processProduct` passing 25 and 0 and `(num) => num + 1000`,
+ * [2] Invoking `processProduct` passing 25 and 0 and
+ *  `(num) => num + 1000`,
  * should return 1000.
 */
-function processProduct(/* CODE HERE */) {
+function processProduct(num1, num2, callback) {
   /* CODE HERE */
-}
+  let numSum = num1 + num2 ;
+  return callback(numSum);
+  }
+  
 
 /**
  * ### Challenge `processContains`
@@ -122,7 +140,8 @@ function processProduct(/* CODE HERE */) {
  * @param item of any kind.
  * @param list array of elements of any kind.
  * @param callback function that takes a boolean as its argument.
- * @returns the result of invoking `callback` passing true if `item` exists in `list`, false otherwise.
+ * @returns the result of invoking
+ *  `callback` passing true if `item` exists in `list`, false otherwise.
  * 
  * Examples of usage of this higher-order function:
  * [1] Invoking `processContains` passing
@@ -133,8 +152,13 @@ function processProduct(/* CODE HERE */) {
  * "lady gaga" and `['foo', 'bar']` and `(bool) => bool ? 'nice!' : 'sad'`,
  * should return "sad".
 */
-function processContains(/* CODE HERE */) {
+function processContains(item, list, cb) {
   /* CODE HERE */
+  list.forEach(function(array, index){
+    let test= console.log(array[index]);
+    return cb (item === test);
+  })
+
 }
 
 /**
@@ -174,12 +198,21 @@ function processDuplicateFree(/* CODE HERE ONLY AFTER COMPLETING ALL OTHER TASKS
  * @instructions
  * Implement this function using forEach().
  * 
- * @param runners array of runners like the one inside the /data/runners.js file.
- * @returns an array with all the runners' full names in the following format: "Smith, John".
- * The full names appear in the array in the same order the runners appear in the `runners` array.
+ * @param runners array of runners like the one 
+ * inside the /data/runners.js file.
+ * @returns an array with all the runners' full names 
+ * in the following format: "Smith, John".
+ * The full names appear in the array in the 
+ * same order the runners appear in the `runners` array.
 */
-function getFullNames(/* CODE HERE */) {
+function getFullNames(runners) {
   /* CODE HERE */
+  let lastNameList = [];
+  function fullName (array){
+    lastNameList.push(`${array.last_name}, ${array.first_name}`)
+  }
+runners.forEach(fullName)
+return lastNameList;
 }
 
 /**
@@ -194,8 +227,12 @@ function getFullNames(/* CODE HERE */) {
  * @returns an array with all the runners' first names in ALL CAPS.
  * The first names appear in the array in the same order the runners appear in the `runners` array.
 */
-function firstNamesAllCaps(/* CODE HERE */) {
+function firstNamesAllCaps(runners) {
   /* CODE HERE */
+  function capName (array){
+    return array.first_name.toUpperCase();
+  }
+  return runners.map(capName);
 }
 
 /**
@@ -211,8 +248,14 @@ function firstNamesAllCaps(/* CODE HERE */) {
  * @returns an array containing only the runners that use the given `tShirtSize`.
  * The runners in the array appear in the same order they appear in the `runners` array.
 */
-function getRunnersByTShirtSize(/* CODE HERE */) {
+function getRunnersByTShirtSize(runners, tShirtSize) {
   /* CODE HERE */
+  let sSize= tShirtSize; 
+  function filterizer (sizes){
+    return sizes.shirt_size === sSize; 
+  }
+const filteredSize = runners.filter(filterizer);
+return filteredSize;
 }
 
 /**
@@ -225,8 +268,12 @@ function getRunnersByTShirtSize(/* CODE HERE */) {
  * @param runners array of runners like the one inside the /data/runners.js file.
  * @returns a number which is the sum of the donations by all runners.
 */
-function tallyUpDonations(/* CODE HERE */) {
+function tallyUpDonations(runners) {
   /* CODE HERE */
+  function summer (total, nextV){
+    return total += nextV.donation;
+  }
+  return runners.reduce(summer, 0);
 }
 
 /////////////// CLOSURES ///////////////
@@ -236,7 +283,8 @@ function tallyUpDonations(/* CODE HERE */) {
  * ### Challenge `counterMaker`
  * 
  * @instructions
- * Fix this function so a counter produced with it will increment correctly!
+ * Fix this function so a counter produced with it 
+ * will increment correctly!
  * Usage is as follows:
  * 
  * const counter = counterMaker()
@@ -247,9 +295,10 @@ function tallyUpDonations(/* CODE HERE */) {
 */
 function counterMaker() {
   // BROKEN CODE STARTS
-  const count = 0;
-  function counter() {
-    ++count
+  let count = -1;
+  return function() {
+     count = count + 1
+     return count;
   }
   // BROKEN CODE ENDS
 }
@@ -259,7 +308,8 @@ function counterMaker() {
  * 
  * @instructions
  * Implement a counter maker that takes a max value for the count.
- * A counter created with it will reset itself after reaching the max value.
+ * A counter created with it will reset itself after reaching 
+ * the max value.
  * Usage is as follows:
  * 
  * const counter = counterMakerWithLimit(3)
@@ -274,8 +324,17 @@ function counterMaker() {
  * counter() // should return 0
  * etc
 */
-function counterMakerWithLimit(/* CODE HERE */) {
+function counterMakerWithLimit(maxV) {
   /* CODE HERE */
+  let count = -1;
+  return function() {
+     count = count + 1
+     if( count > maxV){
+       count = 0;
+     }
+    
+     return count;
+  }
 }
 
 /////////////// END OF CHALLENGE ///////////////
