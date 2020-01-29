@@ -126,7 +126,7 @@ function processSum(numberList, callback) {
 */
 function processProduct(num1, num2, callback) {
   /* CODE HERE */
-  let numSum = num1 + num2 ;
+  let numSum = num1 * num2 ;
   return callback(numSum);
   }
   
@@ -154,11 +154,17 @@ function processProduct(num1, num2, callback) {
 */
 function processContains(item, list, cb) {
   /* CODE HERE */
-  list.forEach(function(array, index){
-    let test= console.log(array[index]);
-    return cb (item === test);
-  })
-
+ 
+  return cb(list.includes(item));
+  // function result (){
+  //   if (list.includes(item)){
+  //     return true;
+  //   }
+  //     else{
+  //       return false;
+  //     }
+  //   }
+  //   cb (result);
 }
 
 /**
